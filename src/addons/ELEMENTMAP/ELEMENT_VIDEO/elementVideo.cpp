@@ -74,7 +74,7 @@ void elementVideo::setup(string _leftChannel, string _rightChannel, int _width, 
     volume  =    1;
     leftChannelPlayer.setVolume(volume);
     
-    calibrationImg.loadImage("./utils/testPattern.jpg");
+    calibrationImg.loadImage("./utils/testPattern.png");
     
 }
 

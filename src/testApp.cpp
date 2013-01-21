@@ -56,8 +56,7 @@ void testApp::setup(){
         elemV1.rightChannelPlayer.setLoopState(OF_LOOP_NONE);
     }
 
-    outputMode = ELM_STEREO_ANAGLYPH;
-//    outputMode = ELM_MONO;
+    outputMode = ELM_MONO;
     swapLeftRight=false;
         
     comandi ="element.essential\n\nSPACEBAR\tplay/pause\nBACKSPACE\tstop\n\n'.'\t\tnext frame\n','\t\tprev frame\n\n'w'\t\toggle quadwarp mode\n'g'\t\ttoggle mesh warp mode\n\n'0'\t\ttoggle calibration image\n'-'\t\tswap left/right frame";
@@ -99,25 +98,95 @@ void testApp::setup(){
     fboGui.end();
     
     //setup minimal interface
-    minimalGUI = new ofxUICanvas(10, 80, 380, 100);
+    minimalGUI = new ofxUICanvas(10, 80, 340, 180);
     minimalGUI->setColorBack(ofColor(0,0,0,125));
-    minimalGUI->setDrawOutline(FALSE);
-    minimalGUI->setDrawBack(TRUE);
+    minimalGUI->setDrawOutline(true);
+    minimalGUI->setDrawBack(true);
 
     //maniglia per spostare l'interfaccia
     bMoveGui = false;
-    minGuiMove = new ofxUIButton(0,0, 20, 20, bMoveGui, "MOVE GUI");
+    minGuiMove = new ofxUIButton(5,5, 20, 20, bMoveGui, "MOVE GUI");
     minGuiMove->setLabelVisible(false);
     minGuiMove->setDrawOutline(true);
     minimalGUI->addWidget(minGuiMove);
     
+    minimalGUI->addWidget(new ofxUILabel(35,5, "ELEMENT ESSENTIAL", OFX_UI_FONT_LARGE));
     
-    minimalGUI->addWidget(new ofxUILabel(35,5, "ELEMENT ESSENTIAL", OFX_UI_FONT_MEDIUM));
+    minPlay = new ofxUILabelButton(35,40, 150, false, "PLAY/PAUSE", OFX_UI_FONT_MEDIUM);
+    minPlay->setDrawOutline(true);
+    minimalGUI->addWidget(minPlay);
+    
+    minStop = new ofxUILabelButton(35, 72, 150, false, "STOP", OFX_UI_FONT_MEDIUM);
+    minStop->setDrawOutline(true);
+    minimalGUI->addWidget(minStop);
+    
+    minSwap = new ofxUILabelToggle(35, 115, 150, false, "SWAP L/R", OFX_UI_FONT_SMALL);
+    minSwap->setDrawOutline(true);
+    minimalGUI->addWidget(minSwap);
+    
+    minOutput = new ofxUILabelToggle(35, 145, 150, false, "STEREO/MONO", OFX_UI_FONT_SMALL);
+    minOutput->setDrawOutline(true);
+    minimalGUI->addWidget(minOutput);
+    
+    minSave = new ofxUILabelButton(200, 40, 50, false, "SAVE", OFX_UI_FONT_SMALL);
+    minSave->setDrawOutline(true);
+    minimalGUI->addWidget(minSave);
+
+    minLoad = new ofxUILabelButton(255, 40, 50, false, "LOAD", OFX_UI_FONT_SMALL);
+    minLoad->setDrawOutline(true);
+    minimalGUI->addWidget(minLoad);
+    
+    minHide = new ofxUILabelButton(200, 72, 105, false, "HIDE GUI", OFX_UI_FONT_SMALL);
+    minHide->setDrawOutline(true);
+    minimalGUI->addWidget(minHide);
+
+    minimalGUI->addWidget(new ofxUIFPSSlider(200, 115, 105, 20, 10, 120, ofGetFrameRate(), "FSP"));
     
     minimalGUI->setVisible(true);
     ofAddListener(minimalGUI->newGUIEvent, this, &testApp::guiEvent);
 
 }
+
+//--------------------------------------------------------------
+void testApp::guiEvent(ofxUIEventArgs &e)
+{
+	string name = e.widget->getName();
+	int kind = e.widget->getKind();
+    
+    if (name == "MOVE GUI") {
+        if (minGuiMove->getValue()) bMoveGui = true;
+    }
+    else if (name == "PLAY/PAUSE") {
+        if (minPlay->getValue()) {
+            if (elemV1.leftChannelPlayer.isPlaying()) elemV1.element_videoPause();
+            else elemV1.element_videoPlay(1);
+        }
+    }
+    else if (name == "STOP") {
+        if (minStop->getValue()) elemV1.element_videoStop();
+    }
+    else if (name == "SAVE") {
+        elemV1.warper.save();
+    }
+    else if (name == "LOAD") {
+        elemV1.warper.load();
+    }
+    else if (name == "HIDE GUI") {
+        if (minHide->getValue()) minimalGUI->setVisible(false);
+    }
+	else if (name == "SWAP L/R") {
+        swapLeftRight=minSwap->getValue();
+    }
+    else if (name == "STEREO/MONO") {
+        if (minOutput->getValue()) {
+            outputMode = ELM_STEREO_ANAGLYPH;
+//            outputMode = ELM_STEREO_OPENGL;
+        } else {
+            outputMode = ELM_MONO;            
+        }
+    }
+}
+
 
 //--------------------------------------------------------------
 void testApp::mouseMovedEvent(ofMouseEventArgs &args){
@@ -289,17 +358,6 @@ void testApp::draw(){
 }
 
 
-//--------------------------------------------------------------
-void testApp::guiEvent(ofxUIEventArgs &e)
-{
-	string name = e.widget->getName();
-	int kind = e.widget->getKind();
-    
-    if (name == "MOVE GUI") {
-        if (minGuiMove->getValue()) bMoveGui = true;
-    }
-	
-}
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
@@ -317,6 +375,8 @@ void testApp::keyPressed(int key){
 //    else if(key == ',') elemV1.element_frameIndietro();        
     
     else if(key == 'i') ofSystemAlertDialog(comandi);
+
+    else if(key == OF_KEY_F1) minimalGUI->setVisible(true);
     
     else if(key == '-') swapLeftRight=!swapLeftRight;
     

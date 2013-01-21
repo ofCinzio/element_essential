@@ -68,8 +68,13 @@ public:
     ofxUICanvas*            minimalGUI;
     ofxUIButton*            minGuiMove;
     ofxUILabelButton*       minPlay;
-    ofxUILabelButton*       minPause;
+    ofxUILabelButton*       minStop;
     ofxUILabelButton*       minRev;
+    ofxUILabelButton*       minSave;
+    ofxUILabelButton*       minLoad;
+    ofxUILabelButton*       minHide;
+    ofxUILabelToggle*       minSwap;
+    ofxUILabelToggle*       minOutput;
     
 
 };
