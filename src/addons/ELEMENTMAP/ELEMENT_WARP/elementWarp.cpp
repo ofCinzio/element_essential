@@ -44,7 +44,6 @@ void elementWarp::setup(int _outputWidth, int _outputHeight, string _name)
     quadWarp.setBottomRightCornerPosition(ofPoint(mainVertici[2].x, mainVertici[2].y));        
     quadWarp.setBottomLeftCornerPosition(ofPoint(mainVertici[3].x, mainVertici[3].y));        
 
-    
     // GRID WARPER INIT
     //default grid= 4x4 control points
     xRes=4;
@@ -1016,6 +1015,11 @@ void elementWarp::warpKeyReleasedHandler(int _key)
 //--------------------------------------------------------------
 void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
 {
+    
+    //salva i valori realtivi alla risoluzione dello schermo
+    int w = ofGetScreenWidth();
+    int h = ofGetScreenHeight();    
+    
     XML.addTag("warp");
     XML.pushTag("warp");
     XML.addValue("xRes", resX);
@@ -1026,9 +1030,8 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     XML.addValue("totVertici", totVertici);
     for(int a = 0; a < totVertici; a++)
     {
-        XML.addValue("values_" + ofToString(a) + "_x", vertici[a].x);
-        XML.addValue("values_" + ofToString(a) + "_y", vertici[a].y);
-        XML.addValue("values_" + ofToString(a) + "_z", vertici[a].z);
+        XML.addValue("values_" + ofToString(a) + "_x", vertici[a].x/w);
+        XML.addValue("values_" + ofToString(a) + "_y", vertici[a].y/h);
     }
     XML.popTag();
     
@@ -1039,7 +1042,6 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     {
         XML.addValue("values_" + ofToString(a) + "_x", textVert[a].x);
         XML.addValue("values_" + ofToString(a) + "_y", textVert[a].y);
-        XML.addValue("values_" + ofToString(a) + "_z", textVert[a].z);
     }
     XML.popTag();
     
@@ -1048,9 +1050,8 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     XML.addValue("totScreenPos", totScreenPos);
     for(int a = 0; a < totScreenPos; a++)
     {
-        XML.addValue("values_" + ofToString(a) + "_x", screenPos[a].x);
-        XML.addValue("values_" + ofToString(a) + "_y", screenPos[a].y);
-        XML.addValue("values_" + ofToString(a) + "_z", screenPos[a].z);
+        XML.addValue("values_" + ofToString(a) + "_x", screenPos[a].x/w);
+        XML.addValue("values_" + ofToString(a) + "_y", screenPos[a].y/h);
     }
     XML.popTag();
     
@@ -1059,9 +1060,8 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     XML.addValue("totMainVertici", totMainVertici);
     for(int a = 0; a < totMainVertici; a++)
     {
-        XML.addValue("values_" + ofToString(a) + "_x", mainVertici[a].x);
-        XML.addValue("values_" + ofToString(a) + "_y", mainVertici[a].y);
-        XML.addValue("values_" + ofToString(a) + "_z", mainVertici[a].z);
+        XML.addValue("values_" + ofToString(a) + "_x", mainVertici[a].x/w);
+        XML.addValue("values_" + ofToString(a) + "_y", mainVertici[a].y/h);
     }
     XML.popTag();
     
@@ -1082,6 +1082,12 @@ void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertic
 //--------------------------------------------------------------
 void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
 {
+    
+    //carica i valori realtivi alla risoluzione dello schermo
+    int w = ofGetScreenWidth();
+    int h = ofGetScreenHeight();    
+
+    
     ofxXmlSettings tempXML;
     string XMLpath = "./XML/"+xmlName;
     tempXML.loadFile(XMLpath);
@@ -1094,9 +1100,8 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     totVertici = tempXML.getValue("totVertici", 0);
     for(int a = 0; a < totVertici; a++)
     {
-        vertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
-        vertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
-        vertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+        vertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0)*w;
+        vertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0)*h;
     }
     tempXML.popTag();
     
@@ -1107,7 +1112,6 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     {
         textVert[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
         textVert[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
-        textVert[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
     }
     tempXML.popTag();
     
@@ -1115,9 +1119,8 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     totScreenPos = tempXML.getValue("totScreenPos", 0);
     for(int a = 0; a < totTextVert; a++)
     {
-        screenPos[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
-        screenPos[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
-        screenPos[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+        screenPos[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0)*w;
+        screenPos[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0)*h;
     }
     tempXML.popTag();
     
@@ -1125,9 +1128,8 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     totMainVertici = tempXML.getValue("totMainVertici", 0);
     for(int a = 0; a < totMainVertici; a++)
     {
-        mainVertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
-        mainVertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
-        mainVertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+        mainVertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0)*w;
+        mainVertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0)*h;
     }
     tempXML.popTag();
     
@@ -1139,6 +1141,133 @@ void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertic
     
     tempXML.popTag();
 }
+
+////--------------------------------------------------------------
+//void elementWarp::saveXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
+//{
+//    XML.addTag("warp");
+//    XML.pushTag("warp");
+//    XML.addValue("xRes", resX);
+//    XML.addValue("yRes", resY);
+//    
+//    XML.addTag("vertici");
+//    XML.pushTag("vertici");
+//    XML.addValue("totVertici", totVertici);
+//    for(int a = 0; a < totVertici; a++)
+//    {
+//        XML.addValue("values_" + ofToString(a) + "_x", vertici[a].x);
+//        XML.addValue("values_" + ofToString(a) + "_y", vertici[a].y);
+//        XML.addValue("values_" + ofToString(a) + "_z", vertici[a].z);
+//    }
+//    XML.popTag();
+//    
+//    XML.addTag("textVert");
+//    XML.pushTag("textVert");
+//    XML.addValue("totTextVert", totTextVert);
+//    for(int a = 0; a < totTextVert; a++)
+//    {
+//        XML.addValue("values_" + ofToString(a) + "_x", textVert[a].x);
+//        XML.addValue("values_" + ofToString(a) + "_y", textVert[a].y);
+//        XML.addValue("values_" + ofToString(a) + "_z", textVert[a].z);
+//    }
+//    XML.popTag();
+//    
+//    XML.addTag("screenPos");
+//    XML.pushTag("screenPos");
+//    XML.addValue("totScreenPos", totScreenPos);
+//    for(int a = 0; a < totScreenPos; a++)
+//    {
+//        XML.addValue("values_" + ofToString(a) + "_x", screenPos[a].x);
+//        XML.addValue("values_" + ofToString(a) + "_y", screenPos[a].y);
+//        XML.addValue("values_" + ofToString(a) + "_z", screenPos[a].z);
+//    }
+//    XML.popTag();
+//    
+//    XML.addTag("mainVertici");
+//    XML.pushTag("mainVertici");
+//    XML.addValue("totMainVertici", totMainVertici);
+//    for(int a = 0; a < totMainVertici; a++)
+//    {
+//        XML.addValue("values_" + ofToString(a) + "_x", mainVertici[a].x);
+//        XML.addValue("values_" + ofToString(a) + "_y", mainVertici[a].y);
+//        XML.addValue("values_" + ofToString(a) + "_z", mainVertici[a].z);
+//    }
+//    XML.popTag();
+//    
+//    XML.addTag("mainIndex");
+//    XML.pushTag("mainIndex");
+//    XML.addValue("totMainIndex", totMainIndex);
+//    for(int a = 0; a < totMainIndex; a++)
+//        XML.addValue("values_" + ofToString(a), mainIndex[a]);
+//    XML.popTag();
+//    
+//    XML.popTag();
+//    string XMLpath = "./XML/"+xmlName;
+//    XML.saveFile(XMLpath);
+//}
+//
+//
+//
+////--------------------------------------------------------------
+//void elementWarp::loadXML(int &resX, int &resY, ofPoint vertici[], int totVertici, ofPoint textVert[], int totTextVert, ofPoint screenPos[], int totScreenPos, ofPoint mainVertici[], int totMainVertici, int mainIndex[], int totMainIndex)
+//{
+//    ofxXmlSettings tempXML;
+//    string XMLpath = "./XML/"+xmlName;
+//    tempXML.loadFile(XMLpath);
+//    
+//    tempXML.pushTag("warp");
+//    resX = tempXML.getValue("xRes", 0);
+//    resY = tempXML.getValue("yRes", 0);
+//    
+//    tempXML.pushTag("vertici");
+//    totVertici = tempXML.getValue("totVertici", 0);
+//    for(int a = 0; a < totVertici; a++)
+//    {
+//        vertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+//        vertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+//        vertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+//    }
+//    tempXML.popTag();
+//    
+//    
+//    tempXML.pushTag("textVert");
+//    totTextVert = tempXML.getValue("totTextVert", 0);
+//    for(int a = 0; a < totTextVert; a++)
+//    {
+//        textVert[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+//        textVert[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+//        textVert[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+//    }
+//    tempXML.popTag();
+//    
+//    tempXML.pushTag("screenPos");
+//    totScreenPos = tempXML.getValue("totScreenPos", 0);
+//    for(int a = 0; a < totTextVert; a++)
+//    {
+//        screenPos[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+//        screenPos[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+//        screenPos[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+//    }
+//    tempXML.popTag();
+//    
+//    tempXML.pushTag("mainVertici");
+//    totMainVertici = tempXML.getValue("totMainVertici", 0);
+//    for(int a = 0; a < totMainVertici; a++)
+//    {
+//        mainVertici[a].x = tempXML.getValue("values_" + ofToString(a) + "_x", 0);
+//        mainVertici[a].y = tempXML.getValue("values_" + ofToString(a) + "_y", 0);
+//        mainVertici[a].z = tempXML.getValue("values_" + ofToString(a) + "_z", 0);
+//    }
+//    tempXML.popTag();
+//    
+//    tempXML.pushTag("mainIndex");
+//    totMainIndex = tempXML.getValue("totMainIndex", 0);
+//    for(int a = 0; a < totMainIndex; a++)
+//        mainIndex[a] = tempXML.getValue("values_" + ofToString(a), 0);
+//    tempXML.popTag();
+//    
+//    tempXML.popTag();
+//}
 
 
 

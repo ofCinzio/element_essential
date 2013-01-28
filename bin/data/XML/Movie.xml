@@ -5,113 +5,81 @@
         <totVertici>4</totVertici>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
         <totVertici>4</totVertici>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
     </vertici>
     <textVert>
         <totTextVert>4</totTextVert>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
         <values_1_x>960.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
         <values_2_x>960.000000000</values_2_x>
         <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
         <values_3_x>0.000000000</values_3_x>
         <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
         <totTextVert>4</totTextVert>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
         <values_1_x>960.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
         <values_2_x>960.000000000</values_2_x>
         <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
         <values_3_x>0.000000000</values_3_x>
         <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
     </textVert>
     <screenPos>
         <totScreenPos>4</totScreenPos>
         <values_0_x>-0.000000000</values_0_x>
         <values_0_y>-0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>-0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>-0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
         <totScreenPos>4</totScreenPos>
         <values_0_x>-0.000000000</values_0_x>
         <values_0_y>-0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>-0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>-0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
     </screenPos>
     <mainVertici>
         <totMainVertici>4</totMainVertici>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
         <totMainVertici>4</totMainVertici>
         <values_0_x>0.000000000</values_0_x>
         <values_0_y>0.000000000</values_0_y>
-        <values_0_z>0.000000000</values_0_z>
-        <values_1_x>1920.000000000</values_1_x>
+        <values_1_x>1.000000000</values_1_x>
         <values_1_y>0.000000000</values_1_y>
-        <values_1_z>0.000000000</values_1_z>
-        <values_2_x>1920.000000000</values_2_x>
-        <values_2_y>1080.000000000</values_2_y>
-        <values_2_z>0.000000000</values_2_z>
+        <values_2_x>1.000000000</values_2_x>
+        <values_2_y>1.000000000</values_2_y>
         <values_3_x>0.000000000</values_3_x>
-        <values_3_y>1080.000000000</values_3_y>
-        <values_3_z>0.000000000</values_3_z>
+        <values_3_y>1.000000000</values_3_y>
     </mainVertici>
     <mainIndex>
         <totMainIndex>4</totMainIndex>
