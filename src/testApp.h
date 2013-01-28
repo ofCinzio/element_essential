@@ -73,6 +73,7 @@ public:
     ofxUILabelButton*       minSave;
     ofxUILabelButton*       minLoad;
     ofxUILabelButton*       minHide;
+    ofxUILabelToggle*       minPattern;
     ofxUILabelToggle*       minSwap;
     ofxUILabelToggle*       minOutput;
     

@@ -59,7 +59,7 @@ void testApp::setup(){
     outputMode = ELM_MONO;
     swapLeftRight=false;
         
-    comandi ="element.essential\n\nSPACEBAR\tplay/pause\nBACKSPACE\tstop\n\n'.'\t\tnext frame\n','\t\tprev frame\n\n'w'\t\toggle quadwarp mode\n'g'\t\ttoggle mesh warp mode\n\n'0'\t\ttoggle calibration image\n'-'\t\tswap left/right frame";
+    comandi ="element.essential\n\nSPACEBAR\tplay/pause\nBACKSPACE\tstop\n\n'.'\t\tnext frame\n','\t\tprev frame\n\n'w'\t\toggle quadwarp mode\n'g'\t\ttoggle mesh warp mode\n\n'0'\t\ttoggle calibration image\n'-'\t\tswap left/right frame\n\n'F1'\t\thide/show gui";
     
     fontSmall.loadFont("NEOSANS.otf", 7);
     fontMedium.loadFont("NEOSANS.otf", 10);
@@ -140,7 +140,11 @@ void testApp::setup(){
     minHide->setDrawOutline(true);
     minimalGUI->addWidget(minHide);
 
-    minimalGUI->addWidget(new ofxUIFPSSlider(200, 115, 105, 20, 10, 120, ofGetFrameRate(), "FSP"));
+    minPattern = new ofxUILabelToggle(200, 104, 105, false, "TEST PATTERN", OFX_UI_FONT_SMALL);
+    minPattern->setDrawOutline(true);
+    minimalGUI->addWidget(minPattern);
+
+    minimalGUI->addWidget(new ofxUIFPSSlider(200, 136, 105, 20, 10, 120, ofGetFrameRate(), "FPS"));
     
     minimalGUI->setVisible(true);
     ofAddListener(minimalGUI->newGUIEvent, this, &testApp::guiEvent);
@@ -174,13 +178,16 @@ void testApp::guiEvent(ofxUIEventArgs &e)
     else if (name == "HIDE GUI") {
         if (minHide->getValue()) minimalGUI->setVisible(false);
     }
+    else if (name == "TEST PATTERN") {
+        elemV1.bDrawCalibrationImg=minPattern->getValue();
+    }
 	else if (name == "SWAP L/R") {
         swapLeftRight=minSwap->getValue();
     }
     else if (name == "STEREO/MONO") {
         if (minOutput->getValue()) {
-            outputMode = ELM_STEREO_ANAGLYPH;
-//            outputMode = ELM_STEREO_OPENGL;
+            if (bGLStereoCapable) outputMode = ELM_STEREO_OPENGL;
+            else outputMode = ELM_STEREO_ANAGLYPH;            
         } else {
             outputMode = ELM_MONO;            
         }
