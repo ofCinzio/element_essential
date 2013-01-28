@@ -58,6 +58,7 @@ void testApp::setup(){
 
     outputMode = ELM_MONO;
     swapLeftRight=false;
+    parallax=0;
         
     comandi ="element.essential\n\nSPACEBAR\tplay/pause\nBACKSPACE\tstop\n\n'.'\t\tnext frame\n','\t\tprev frame\n\n'w'\t\toggle quadwarp mode\n'g'\t\ttoggle mesh warp mode\n\n'0'\t\ttoggle calibration image\n'-'\t\tswap left/right frame\n\n'F1'\t\thide/show gui";
     
@@ -98,7 +99,7 @@ void testApp::setup(){
     fboGui.end();
     
     //setup minimal interface
-    minimalGUI = new ofxUICanvas(10, 80, 340, 180);
+    minimalGUI = new ofxUICanvas(10, 80, 340, 230);
     minimalGUI->setColorBack(ofColor(0,0,0,125));
     minimalGUI->setDrawOutline(true);
     minimalGUI->setDrawBack(true);
@@ -124,9 +125,25 @@ void testApp::setup(){
     minSwap->setDrawOutline(true);
     minimalGUI->addWidget(minSwap);
     
-    minOutput = new ofxUILabelToggle(35, 145, 150, false, "STEREO/MONO", OFX_UI_FONT_SMALL);
-    minOutput->setDrawOutline(true);
-    minimalGUI->addWidget(minOutput);
+    minEye = new ofxUICenteredSlider(35, 145, 150, 15, -30, 30, 0, "PARALLAX");
+    minEye->setDrawOutline(true);
+    minimalGUI->addWidget(minEye);
+    
+    
+    
+    minMono = new ofxUILabelToggle(35, 190, 85, true, "MONO", OFX_UI_FONT_SMALL);
+    minMono->setDrawOutline(true);
+    minimalGUI->addWidget(minMono);
+
+    minAnaglyph = new ofxUILabelToggle(127, 190, 85, false, "ANAGLYPH", OFX_UI_FONT_SMALL);
+    minAnaglyph->setDrawOutline(true);
+    minimalGUI->addWidget(minAnaglyph);
+
+    minOpenGL = new ofxUILabelToggle(219, 190, 85, false, "OPENGL", OFX_UI_FONT_SMALL);
+    minOpenGL->setDrawOutline(true);
+    minimalGUI->addWidget(minOpenGL);
+
+    
     
     minSave = new ofxUILabelButton(200, 40, 50, false, "SAVE", OFX_UI_FONT_SMALL);
     minSave->setDrawOutline(true);
@@ -184,13 +201,23 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	else if (name == "SWAP L/R") {
         swapLeftRight=minSwap->getValue();
     }
-    else if (name == "STEREO/MONO") {
-        if (minOutput->getValue()) {
-            if (bGLStereoCapable) outputMode = ELM_STEREO_OPENGL;
-            else outputMode = ELM_STEREO_ANAGLYPH;            
-        } else {
-            outputMode = ELM_MONO;            
-        }
+    else if (name == "PARALLAX") {
+        parallax=minEye->getScaledValue();
+    }
+    else if (name == "MONO") {
+        outputMode = ELM_MONO;
+        minAnaglyph->setValue(false);
+        minOpenGL->setValue(false);
+    }
+    else if (name == "ANAGLYPH") {
+        outputMode = ELM_STEREO_ANAGLYPH;
+        minMono->setValue(false);
+        minOpenGL->setValue(false);
+    }
+    else if (name == "OPENGL") {
+        outputMode = ELM_STEREO_OPENGL;
+        minMono->setValue(false);
+        minAnaglyph->setValue(false);
     }
 }
 
@@ -256,10 +283,10 @@ void testApp::update(){
     fboRight.begin();
     ofClear(0,0,0,0);
     
-    //ofPushMatrix();
-    //inserire qui l'eventuale ofTranslate(parallax,0); (a cui si riferiscono i push-pop matrix)
+    ofPushMatrix();
+    ofTranslate(parallax,0);
     elemV1.drawRight(0, 0, outputX, outputY);
-    //ofPopMatrix();
+    ofPopMatrix();
     
     fboRight.end();
     

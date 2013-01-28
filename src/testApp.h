@@ -55,6 +55,7 @@ public:
     
     int                     outputMode;
     bool                    swapLeftRight;
+    float                     parallax;
     
     ofTrueTypeFont          fontLarge;
     ofTrueTypeFont          fontSmall;
@@ -75,7 +76,11 @@ public:
     ofxUILabelButton*       minHide;
     ofxUILabelToggle*       minPattern;
     ofxUILabelToggle*       minSwap;
-    ofxUILabelToggle*       minOutput;
+    ofxUICenteredSlider*    minEye;
+    ofxUILabelToggle*       minMono;
+    ofxUILabelToggle*       minAnaglyph;
+    ofxUILabelToggle*       minOpenGL;
+    ofxUILabelToggle*       minGL;
     
 
 };
