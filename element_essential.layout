@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="release" />
+	<File name="..\..\..\addons\ofxUImod\src\ofxUI.h" open="1" top="1" tabpos="4">
+		<Cursor position="5110" topLine="129" />
+	</File>
+	<File name="src\ELEMENTMAP\ELEMENT_VIDEO\elementVideo.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="2634" topLine="0" />
+	</File>
+	<File name="src\testApp.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="2198" topLine="45" />
+	</File>
+	<File name="src\testApp.h" open="1" top="0" tabpos="2">
+		<Cursor position="101" topLine="51" />
+	</File>
+</CodeBlocks_layout_file>
